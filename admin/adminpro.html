@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Admin Dashboard</title>
+
+<style>
+
+/* ===== RESET ===== */
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+
+    <div class="logo">UX <span>Pacific</span></div>
+
+    <div class="profile">
+        <div class="avatar">SC</div>
+        <div>
+            <strong>Sarah Chen</strong><br>
+            <small>Admin</small>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="admindashboard.html" class="menu-item">🏠 Dashboard</a>
+        <a href="admintask.html" class="menu-item">✅ Tasks</a>
+        <a href="adminemp.html" class="menu-item">👥 Employees</a>
+        <a href="adminreport.html" class="menu-item">📊 Reports</a>
+        <a href="adminpro.html" class="menu-item active">👤 Profile</a>
+    </div>
+
+    <div class="logout">
+        <button class="logout-btn" onclick="logout()">↩ Logout</button>
+    </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+    <section class="task-page">
+
+        <!-- HEADER -->
+        <div class="task-header">
+            <div>
+                <h1>Profile</h1>
+                <p>Create, assign, and track tasks across your team.</p>
+            </div>
+    
+            <button class="create-btn">+ Create Task</button>
+        </div>
+        
+        <div class="profile-wrapper">
+
+    <!-- LEFT PROFILE CARD -->
+    <div class="profile-card">
+
+        <div class="profile-avatar">SC</div>
+
+        <h2>Sarah Chen</h2>
+        <p class="role">Admin</p>
+
+        <span class="status">Active</span>
+
+    </div>
+
+
+    <!-- RIGHT INFO PANEL -->
+    <div class="info-panel">
+
+        <div class="info-box">
+            <div class="icon">👤</div>
+            <div>
+                <p class="label">Full Name</p>
+                <h4>Sarah Chen</h4>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="icon">✉</div>
+            <div>
+                <p class="label">Email Address</p>
+                <h4>admin@uiuxpacific.com</h4>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="icon">🪪</div>
+            <div>
+                <p class="label">Employee ID</p>
+                <h4>EMP001</h4>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="icon">🏢</div>
+            <div>
+                <p class="label">Department</p>
+                <h4>Management</h4>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="icon">💼</div>
+            <div>
+                <p class="label">Role</p>
+                <h4>Admin</h4>
+            </div>
+        </div>
+
+    </div>
+    <div class="security-panel">
+
+    <h3 class="panel-title">Security</h3>
+
+    <!-- Change Password -->
+    <div class="security-item">
+        <div class="sec-left">
+            <div class="sec-icon lock">🔒</div>
+
+            <div>
+                <h4>Change Password</h4>
+                <p>Update your account password</p>
+            </div>
+        </div>
+
+        <span class="arrow">→</span>
+    </div>
+
+
+    <!-- Login Activity -->
+    <div class="security-item">
+        <div class="sec-left">
+            <div class="sec-icon success">✓</div>
+
+            <div>
+                <h4>Login Activity</h4>
+                <p>Last login: Today at 9:30 AM</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+    
+</section>
+    
+</div>
+
+
+
+
+
+</body>
+<script>
+function logout(){
+    window.location.href = "login.html"; // back to login page
+}
+
+
+
+function showPage(pageId){
+
+    /* hide all pages */
+    document.querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
+
+    /* show selected page */
+    document.getElementById(pageId)
+        .classList.add("active");
+
+
+    /* sidebar active highlight */
+    document.querySelectorAll(".menu-item")
+        .forEach(item => item.classList.remove("active"));
+
+    event.target.classList.add("active");
+}
+
+function revealOnScroll(){
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach(el => {
+
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+
+        if(elementTop < windowHeight - 80){
+            el.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+
+/* run once on load */
+revealOnScroll();
+
+
+
+
+</script>
+
+</html>

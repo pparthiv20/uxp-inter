@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Admin Dashboard</title>
+<style>
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+body{
+    background:#061a2b;
+    color:#fff;
+    display:flex;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:#041423;
+    padding:25px 18px;
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:30px;
+}
+
+.logo span{
+    color:#22c1ff;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2ec5ff,#2b6cff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.menu-item{
+    text-decoration:none;
+    color:#c9d6e2;
+    padding:10px 12px;
+    border-radius:8px;
+}
+
+.menu-item:hover,
+.menu-item.active{
+    background:#0a2a44;
+    color:#fff;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    width:85%;
+}
+
+.logout-btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#0a2a44;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* ===== MAIN AREA ===== */
+.main{
+    margin-left:240px;   /* IMPORTANT */
+    width:calc(100% - 240px);
+    padding:35px;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.employee-grid{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* ===== HEADER ===== */
+.task-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.task-header h1{
+    font-size:32px;
+}
+
+.task-header p{
+    color:#9bb3c9;
+    margin-top:6px;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#25c6ff,#2f6fff);
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* ===== FILTER BAR ===== */
+.task-filters{
+    display:flex;
+    gap:18px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.search{
+    flex:1;
+    min-width:280px;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #12324a;
+    background:#08233a;
+    color:#fff;
+}
+
+.filter{
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #12324a;
+    background:#08233a;
+    color:#fff;
+}
+
+/* ===== CARDS GRID ===== */
+.emp-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:25px;
+}
+
+/* ===== CARD ===== */
+.card{
+    background:linear-gradient(180deg,#071f34,#041829);
+    padding:25px;
+    border-radius:18px;
+    border:1px solid #0d314b;
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.badge{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.badge.active{
+    background:#0e3d2e;
+    color:#19ff9c;
+}
+
+.card h3{
+    margin-bottom:6px;
+}
+
+.role{
+    color:#00ffd0;
+    font-size:14px;
+}
+
+.info{
+    margin-top:15px;
+    color:#a9c0d4;
+    line-height:1.8;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.actions{
+    margin-top:20px;
+    display:flex;
+    gap:15px;
+}
+
+.actions button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.edit{
+    background:#1b2f46;
+    color:#fff;
+}
+
+.disable{
+    background:#3a0f16;
+    color:#ff4d4d;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+
+    <div class="logo">UX <span>Pacific</span></div>
+
+    <div class="profile">
+        <div class="avatar">SC</div>
+        <div>
+            <strong>Sarah Chen</strong><br>
+            <small>Admin</small>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="admindashboard.html" class="menu-item">🏠 Dashboard</a>
+        <a href="admintask.html" class="menu-item">✅ Tasks</a>
+        <a href="adminemp.html" class="menu-item active">👥 Employees</a>
+        <a href="adminreport.html" class="menu-item">📊 Reports</a>
+        <a href="adminpro.html" class="menu-item">👤 Profile</a>
+    </div>
+
+    <div class="logout">
+        <button class="logout-btn" onclick="logout()">↩ Logout</button>
+    </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+    <section class="task-page">
+    <div class="employee-grid">
+        <!-- HEADER -->
+        <div class="task-header">
+            <div>
+                <h1>Task Management</h1>
+                <p>Create, assign, and track tasks across your team.</p>
+            </div>
+    
+            <button class="create-btn">+ Create Task</button>
+        </div>
+    
+        <!-- FILTER BAR -->
+        <div class="task-filters">
+    
+            <input type="text" placeholder="Search tasks..." class="search">
+    
+            <select class="filter">
+                <option>All Status</option>
+                <option>Completed</option>
+                <option>Pending</option>
+                <option>In Progress</option>
+            </select>
+    
+            <select class="filter">
+                <option>All Employees</option>
+            </select>
+    
+        </div>
+        
+        <!-- Employee cards -->
+        <div class="emp-cards">
+        <div class="card">
+            <div class="card-top">
+                <div class="avatar">SC</div>
+                <span class="badge active">Active</span>
+            </div>
+
+            <h3>Sarah Chen</h3>
+            <span class="role admin">Admin</span>
+
+            <div class="info">
+                <p>✉ admin@uiuxpacific.com</p>
+                <p>🏢 Management</p>
+                <p>🆔 EMP001</p>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="disable">Disable</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <div class="avatar">SC</div>
+                <span class="badge active">Active</span>
+            </div>
+
+            <h3>Sarah Chen</h3>
+            <span class="role admin">Admin</span>
+
+            <div class="info">
+                <p>✉ admin@uiuxpacific.com</p>
+                <p>🏢 Management</p>
+                <p>🆔 EMP001</p>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="disable">Disable</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <div class="avatar">SC</div>
+                <span class="badge active">Active</span>
+            </div>
+
+            <h3>Sarah Chen</h3>
+            <span class="role admin">Admin</span>
+
+            <div class="info">
+                <p>✉ admin@uiuxpacific.com</p>
+                <p>🏢 Management</p>
+                <p>🆔 EMP001</p>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="disable">Disable</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <div class="avatar">SC</div>
+                <span class="badge active">Active</span>
+            </div>
+
+            <h3>Sarah Chen</h3>
+            <span class="role admin">Admin</span>
+
+            <div class="info">
+                <p>✉ admin@uiuxpacific.com</p>
+                <p>🏢 Management</p>
+                <p>🆔 EMP001</p>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="disable">Disable</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <div class="avatar">SC</div>
+                <span class="badge active">Active</span>
+            </div>
+
+            <h3>Sarah Chen</h3>
+            <span class="role admin">Admin</span>
+
+            <div class="info">
+                <p>✉ admin@uiuxpacific.com</p>
+                <p>🏢 Management</p>
+                <p>🆔 EMP001</p>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="disable">Disable</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-top">
+                <div class="avatar">SC</div>
+                <span class="badge active">Active</span>
+            </div>
+
+            <h3>Sarah Chen</h3>
+            <span class="role admin">Admin</span>
+
+            <div class="info">
+                <p>✉ admin@uiuxpacific.com</p>
+                <p>🏢 Management</p>
+                <p>🆔 EMP001</p>
+            </div>
+
+            <div class="actions">
+                <button class="edit">Edit</button>
+                <button class="disable">Disable</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+</div>
+</body>
+</html>
